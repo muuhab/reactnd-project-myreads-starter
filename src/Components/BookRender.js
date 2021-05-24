@@ -4,7 +4,7 @@ import {getAll, update} from '../BooksAPI'
 export const BookRender = ({ books,onUpdate }) => {
   const handleSelect=(book,e)=>{
      update(book,e).then(getAll().then(data=>onUpdate(data)))
-    
+    console.log('as')
     
 }
   return (
@@ -22,7 +22,7 @@ export const BookRender = ({ books,onUpdate }) => {
                     }}
                   />
                   <div className="book-shelf-changer">
-                    <select onChange={(e)=>handleSelect(book,e.target.value)} defaultValue={book.shelf} >
+                    <select onChange={(e)=>handleSelect(book,e.target.value)} defaultValue={book.shelf?book.shelf:'move'} >
                       <option value="move" disabled  >
                         Move to...
                       </option>
