@@ -4,7 +4,6 @@ import {getAll, update} from '../BooksAPI'
 export const BookRender = ({ books,onUpdate }) => {
   const handleSelect=(book,e)=>{
      update(book,e).then(getAll().then(data=>onUpdate(data)))
-    console.log('as')
     
 }
   return (
