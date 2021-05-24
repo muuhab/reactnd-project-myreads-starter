@@ -5,12 +5,12 @@ import  {BookRender} from './BookRender'
 
 class Search extends Component {
   state={
-    books:{},
+    books:[],
     query:""
   }
   clearSearch=()=>{
     this.setState(()=>({
-      books:{}
+      books:[]
     }))
   }
   componentDidUpdate(prevProps, prevState) {
@@ -36,7 +36,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {this.state.books.length? <BookRender books={this.state.books}/>:null }
+          {this.state.books.length? <BookRender onUpdate={()=>{}} books={this.state.books}/>:null }
            
         </div>
       </div>

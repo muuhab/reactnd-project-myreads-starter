@@ -1,9 +1,11 @@
 import React from "react";
 import {getAll, update} from '../BooksAPI'
 
-export const BookRender = ({ books }) => {
+export const BookRender = ({ books,onUpdate }) => {
   const handleSelect=(book,e)=>{
-    update(book,e)
+     update(book,e).then(getAll().then(data=>onUpdate(data)))
+    
+    
 }
   return (
     <ol className="books-grid">
@@ -20,15 +22,15 @@ export const BookRender = ({ books }) => {
                     }}
                   />
                   <div className="book-shelf-changer">
-                    <select onChange={(e)=>handleSelect(book,e.target.value)}>
-                      <option value="move" disabled>
+                    <select onChange={(e)=>handleSelect(book,e.target.value)} defaultValue={book.shelf} >
+                      <option value="move" disabled  >
                         Move to...
                       </option>
-                      <option value="currentlyReading" selected={book.shelf==='currentlyReading' ? true:false}>
+                      <option value="currentlyReading">
                         Currently Reading
                       </option>
-                      <option value="wantToRead"selected={book.shelf==='wantToRead' ? true:false}>Want to Read</option>
-                      <option value="read" selected={book.shelf==='read' ? true:false}>Read</option>
+                      <option value="wantToRead">Want to Read</option>
+                      <option value="read">Read</option>
                       <option value="none">None</option>
                     </select>
                   </div>

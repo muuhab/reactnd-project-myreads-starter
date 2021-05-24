@@ -11,6 +11,12 @@ export class Home extends Component {
       getAll().then((data)=>this.setState({
           books:data
       }))
+      
+  }
+  updateBooks=(e)=>{
+    this.setState(()=>({
+      books:e
+    }))
   }
   render() {
     return (
@@ -24,20 +30,20 @@ export class Home extends Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                {this.state.books.length? <BookRender books={this.state.books.filter((book)=>(book.shelf==='currentlyReading'))}/>:null }
+                {this.state.books.length? <BookRender onUpdate={(newBooks)=>this.updateBooks(newBooks)} books={this.state.books.filter((book)=>(book.shelf==='currentlyReading'))}/>:null }
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  {this.state.books.length? <BookRender books={this.state.books.filter((book)=>(book.shelf==='wantToRead'))}/>:null }
+                  {this.state.books.length? <BookRender onUpdate={(x)=>this.updateBooks(x)} books={this.state.books.filter((book)=>(book.shelf==='wantToRead'))}/>:null }
 
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  {this.state.books.length? <BookRender books={this.state.books.filter((book)=>(book.shelf==='read'))}/>:null }
+                  {this.state.books.length? <BookRender onUpdate={(x)=>this.updateBooks(x)} books={this.state.books.filter((book)=>(book.shelf==='read'))}/>:null }
 
                   </div>
                 </div>
