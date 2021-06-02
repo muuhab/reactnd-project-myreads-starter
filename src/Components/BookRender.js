@@ -8,8 +8,10 @@ export const BookRender = ({ books,onUpdate }) => {
 }
   return (
     <ol className="books-grid">
-      { books.map((book) => (
+      { books.filter((book)=>(book.imageLinks!=null)).map((book) => (
+            
             <li key={book.id}>
+              {console.log(book)}
               <div className="book">
                 <div className="book-top">
                   <div
@@ -21,7 +23,7 @@ export const BookRender = ({ books,onUpdate }) => {
                     }}
                   />
                   <div className="book-shelf-changer">
-                    <select onChange={(e)=>handleSelect(book,e.target.value)} defaultValue={book.shelf?book.shelf:'move'} >
+                    <select onChange={(e)=>handleSelect(book,e.target.value)} defaultValue={book.shelf?book.shelf:'none'} >
                       <option value="move" disabled  >
                         Move to...
                       </option>
