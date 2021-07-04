@@ -7,8 +7,8 @@ export class Home extends Component {
       books:[]
   };
   
-  componentDidMount(){
-      getAll().then((data)=>this.setState({
+  async componentDidMount(){
+     await getAll().then((data)=>this.setState({
           books:data
       }))
       

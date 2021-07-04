@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import {search} from '../BooksAPI'
+import {search,getAll} from '../BooksAPI'
 import  {BookRender} from './BookRender'
 
 class Search extends Component {
   state={
+    mybooks:[],
     books:[],
     query:""
+  }
+  componentDidMount(){
+    getAll().then(data=>this.setState({
+      mybooks:data
+    }))
   }
   clearSearch=()=>{
     this.setState(()=>({
@@ -15,14 +21,26 @@ class Search extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.query !== this.state.query) {
-      search(`${this.state.query}`).then((data)=>{data?this.setState({
-        books:data
-      }):this.clearSearch()})
-    }
+      search(`${this.state.query}`).then(result=>{if(result){
+        this.state.mybooks.map(mybook=>{if(!result.error)result.map(book=>{
+          if(mybook.id===book.id)
+            book.shelf=mybook.shelf
+            return book
+        })
+        return mybook
+      })
+        this.setState({
+          books:result
+        })
+
+      }
+        else
+        this.clearSearch()})
   }
+}
    handleSearch=(e)=>{
     this.setState(()=>({
-      query: e.trim()
+      query: e
     })
     )
   }
