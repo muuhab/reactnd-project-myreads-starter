@@ -55,7 +55,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {this.state.books.length? <BookRender onUpdate={()=>{}} books={this.state.books}/>:null }
+          {this.state.books.length? <BookRender loading={()=>{}} onUpdate={()=>{}} books={this.state.books}/>:null }
            
         </div>
       </div>
