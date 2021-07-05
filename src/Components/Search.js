@@ -9,10 +9,11 @@ class Search extends Component {
     books:[],
     query:""
   }
-  componentDidMount(){
-    getAll().then(data=>this.setState({
-      mybooks:data
-    }))
+  async componentDidMount(){
+    const books=await getAll()
+    this.setState({
+      mybooks:books
+    })
   }
   clearSearch=()=>{
     this.setState(()=>({

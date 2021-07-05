@@ -1,17 +1,22 @@
 import React from "react";
 import {getAll, update} from '../BooksAPI'
 
-export const BookRender = ({ books,onUpdate }) => {
+export const BookRender = ({ books,onUpdate,loading }) => {
+ 
   const handleSelect=(book,e)=>{
-     update(book,e).then(getAll().then(data=>onUpdate(data)))
+    loading()
+    update(book, e)
+    .then(getAll)
+    .then((data) => onUpdate(data))
+    .then(loading)
     
 }
   return (
+
     <ol className="books-grid">
       { books.filter((book)=>(book.imageLinks!=null)).map((book) => (
             
             <li key={book.id}>
-              {console.log(book)}
               <div className="book">
                 <div className="book-top">
                   <div
